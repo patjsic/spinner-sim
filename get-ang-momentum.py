@@ -8,14 +8,14 @@ import time
 
 
 filname = input("Insert file name: ")
-
+video_title = input("Insert video title (include the .mp4): ")
 #Make directory to store frames
 mkdir("analysis-" + filname)
 
 #Cut video using OpenCV2
 
 def vid_to_frame(input, output):
-    vidcap = cv2.VideoCapture('5min.mp4')
+    vidcap = cv2.VideoCapture(str(video_title))
     vid_length = int(vidcap.get(cv2.CAP_PROP_FRAME_COUNT)) - 1
     count = 0
 
@@ -48,7 +48,7 @@ def vid_to_frame(input, output):
 
 #input = "C:\\Users\\Patrick\\Documents\\Research\\Spinners\\5min.mp4"
 output = "analysis-" + filname
-fps, nframes = vid_to_frame(input, output)
+fps, nframes = vid_to_frame(video_title, output)
 print(nframes)
 print('Now running time-corr.py')
 system('python time-corr.py -f' + str(filname) + '-nframes' +  str(nframes) + '-fps' + str(fps))
